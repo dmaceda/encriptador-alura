@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Website</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="body">
+    <header>
+      <nav>
+        <img src="./assets/Vector.png" alt="logo" id="logo" />
+      </nav>
+    </header>
+    <main>
+      <div class="vista_container">
+        <div class="container_">
+          <img src="./assets/Muñeco.png" alt="" id="imagen" />
+          <h2 id="mensaje">Ningun mensaje fue encontrado</h2>
+          <p id="help">Ingrese el texto que desea encriptar o desencriptar</p>
+          <button id="but3">Copiar</button>
+        </div>
+      </div>
+
+      <form class="general">
+        <input
+          type="text"
+          placeholder="Ingrese texto aquí"
+          class="input"
+          id="texto"
+        />
+      </form>
+      <div class="info">
+        <img src="./assets/info.png" alt="info" width="16px" height="16px" />
+        <p>Sólo letras mayúsculas y sin acentos</p>
+      </div>
+      <div class="buttons">
+        <button id="but1">Encriptar</button>
+        <button id="but2">Desencriptar</button>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>
+        &copy; 2022 Encriptador desarrollado por Diego Maceda para Alura Latam
+      </p>
+    </footer>
+  </body>
+  <script>
+    var encriptado = "";
+    var nuevo = "";
+    var input = document.querySelector("input");
+
+    function encriptar() {
+      if (input.value === "") {
+        mensaje.innerHTML = "Ningun mensaje fue encontrado";
+      }
+
+      for (var i = 0; i < input.value.length; i++) {
+        if (
+          input.value[i] !== "a" &&
+          input.value[i] !== "e" &&
+          input.value[i] !== "i" &&
+          input.value[i] !== "o" &&
+          input.value[i] !== "u"
+        ) {
+          encriptado = encriptado + input.value[i];
+        }
+
+        if (input.value[i] === "a") {
+          encriptado = encriptado + "ai";
+        }
+        if (input.value[i] === "e") {
+          encriptado = encriptado + "enter";
+        }
+        if (input.value[i] === "i") {
+          encriptado = encriptado + "imes";
+        }
+        if (input.value[i] === "o") {
+          encriptado = encriptado + "ober";
+        }
+        if (input.value[i] === "u") {
+          encriptado = encriptado + "ufat";
+        }
+      }
+
+      var mensaje = document.getElementById("mensaje");
+      mensaje.innerHTML = encriptado;
+      nuevo = encriptado;
+      input.value = "";
+      encriptado = "";
+      var help = document.getElementById("help");
+      help.innerHTML = "";
+      document.getElementById("imagen").style.display = "none";
+    }
+
+    function desencriptar() {
+      if (nuevo.includes("ai")) {
+        nuevo = nuevo.replace("ai", "a");
+      }
+      if (nuevo.includes("enter")) {
+        nuevo = nuevo.replace("enter", "e");
+      }
+      if (nuevo.includes("imes")) {
+        nuevo = nuevo.replace("imes", "i");
+      }
+      if (nuevo.includes("ober")) {
+        nuevo = nuevo.replace("ober", "o");
+      }
+      if (nuevo.includes("ufat")) {
+        nuevo = nuevo.replace("ufat", "u");
+      }
+
+      var mensaje = document.getElementById("mensaje");
+      mensaje.innerHTML = nuevo;
+    }
+
+    function copiar() {
+      var mensaje = document.getElementById("mensaje");
+      var copyText = mensaje.innerHTML;
+      var textArea = document.createElement("textarea");
+      textArea.value = copyText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("Copy");
+      textArea.remove();
+    }
+
+    var buttonencriptar = document.getElementById("but1");
+    buttonencriptar.onclick = encriptar;
+
+    var buttondesencriptar = document.getElementById("but2");
+    buttondesencriptar.onclick = desencriptar;
+
+    var buttoncopiar = document.getElementById("but3");
+    buttoncopiar.onclick = copiar;
+  </script>
+</html>
